@@ -5,10 +5,6 @@ const express = require('express');
 // CONFIGURATION SETUP
 const app = express();
 
-// Bookmarks ROUTES
-const bookmarksController = require('./controllers/bookmarkController.js');
-app.use('/bookmarks', bookmarksController);
-
 // MIDDLEWARE SETUP
 app.use(cors());
 app.use(express.json());
@@ -17,6 +13,10 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send(' 👋 Welcome to Bookmarks App! Nice to meet you!');
 });
+
+// Bookmarks ROUTES
+const bookmarksController = require('./controllers/bookmarkController.js');
+app.use('/bookmarks', bookmarksController);
 
 // 404 PAGE
 app.get('*', (req, res) => {

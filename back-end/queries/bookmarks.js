@@ -1,3 +1,4 @@
+const { as } = require('pg-promise');
 const db = require('../db/dbConfig.js');
 
 // SHOW ALL BOOKMARKS
@@ -33,4 +34,36 @@ const createBookmark = async (bookmark) => {
   }
 };
 
-module.exports = { getAllBookmarks, getBookmark, createBookmark };
+// UPDATE
+const updateBookmark = async (id, bookmark) => {
+  try {
+    const updatedBookmark = await db.one(
+      'UPDATE bookmarks SET name=$1, url=$2, category=$3, is_favorite=$4 WHERE id=$5 RETURNING *',
+      [bookmark.name, bookmark.url, bookmark.category, bookmark.is_favorite, id]
+    );
+    return updatedBookmark;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+// DELETE
+const deleteBookmark = async (id) => {
+  try {
+    const deletedBookmark = await db.one(
+      'DELETE FROM bookmarks WHERE id=$1 RETURNING *',
+      id
+    );
+    return deletedBookmark;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+module.exports = {
+  getAllBookmarks,
+  getBookmark,
+  createBookmark,
+  updateBookmark,
+  deleteBookmark,
+};
