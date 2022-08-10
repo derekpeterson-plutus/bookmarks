@@ -14,6 +14,8 @@ const {
   deleteBookmark,
 } = require('../queries/bookmarks');
 
+
+
 // INDEX
 // bookmarks.get('/', (req, res) => {
 //   res.json({ status: 'Everything is OK!' });
@@ -22,14 +24,14 @@ const {
 // INDEX (SHOW ALL BOOKMARKS)
 bookmarks.get('/', async (req, res) => {
   const allBookmarks = await getAllBookmarks();
-  if (allBookmarks[0]) {
+  if (allBookmarks) {
     res.status(200).json(allBookmarks);
   } else {
     res.status(500).json({ error: 'Server Error!' });
   }
 });
 
-// SHOW
+// SHOW INDIVIDUAL BOOKMARK BY ID
 bookmarks.get('/:id', async (req, res) => {
   const { id } = req.params;
   const bookmark = await getBookmark(id);

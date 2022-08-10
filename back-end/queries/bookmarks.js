@@ -1,7 +1,7 @@
-const { as } = require('pg-promise');
+//const { as } = require('pg-promise');
 const db = require('../db/dbConfig.js');
 
-// SHOW ALL BOOKMARKS
+// INDEX SHOW ALL BOOKMARKS
 const getAllBookmarks = async () => {
   try {
     const allBookmarks = await db.any('SELECT * FROM bookmarks');
@@ -17,7 +17,7 @@ const getBookmark = async (id) => {
     const oneBookmark = await db.one('SELECT * FROM bookmarks WHERE id=$1', id);
     return oneBookmark;
   } catch (error) {
-    return error.massage;
+    return error.message;
   }
 };
 

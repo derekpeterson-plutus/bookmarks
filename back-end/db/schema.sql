@@ -1,4 +1,5 @@
 -- Create the blueprint for our database
+
 DROP DATABASE IF EXISTS bookmarks_dev;
 CREATE DATABASE bookmarks_dev;
 
@@ -10,6 +11,21 @@ CREATE TABLE bookmarks (
     url TEXT,
     category TEXT,
     is_favorite BOOLEAN
+);
+
+-- Create another table called reviews
+
+DROP TABLE IF EXISTS reviews;
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    reviewer TEXT,
+    title TEXT,
+    content TEXT,
+    rating NUMERIC,
+    CHECK (rating >= 0 AND rating <= 5),
+    bookmark_id INTEGER REFERENCES bookmarks (id)
+    ON DELETE CASCADE
 );
 
 -- psql -U postgres -f db/schema.sql
