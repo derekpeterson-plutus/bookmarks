@@ -18,9 +18,10 @@ app.get('/', (req, res) => {
 const bookmarksController = require('./controllers/bookmarkController.js');
 app.use('/bookmarks', bookmarksController);
 
-// IMPORT Reviews Routes
-const reviewsController = require('./controllers/reviewsController.js');
-app.use('/reviews', reviewsController);
+// IMPORT Reviews ROUTES
+// After updating the route in reviewController.js and bookmarkController.js, we can comment out the codes below
+//const reviewsController = require('./controllers/reviewsController.js');
+//app.use('/reviews', reviewsController);
 
 // 404 PAGE
 app.get('*', (req, res) => {

@@ -1,5 +1,4 @@
 const express = require('express');
-//const db = require('../db/dbConfig');
 
 const { getBookmark } = require('../queries/bookmarks');
 

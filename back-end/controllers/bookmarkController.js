@@ -1,11 +1,13 @@
 //DEPENDENCIES SETUP
 const express = require('express');
 const bookmarks = express.Router();
+
 const {
   checkBoolean,
   checkName,
   validateURL,
 } = require('../validations/checkBookmarks');
+
 const {
   getAllBookmarks,
   getBookmark,
@@ -14,7 +16,8 @@ const {
   deleteBookmark,
 } = require('../queries/bookmarks');
 
-
+const reviewsController = require('./reviewsController');
+bookmarks.use('/:bookmarkId/reviews', reviewsController);
 
 // INDEX
 // bookmarks.get('/', (req, res) => {

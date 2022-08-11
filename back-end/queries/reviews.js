@@ -1,8 +1,11 @@
 const db = require('../db/dbConfig');
 
-const getAllReviews = async () => {
+const getAllReviews = async (bookmark_id) => {
   try {
-    const allReviews = await db.any('SELECT * FROM reviews');
+    const allReviews = await db.any(
+      'SELECT * FROM reviews WHERE bookmark_id=$1',
+      bookmark_id
+    );
     return allReviews;
   } catch (error) {
     return error;
@@ -18,14 +21,14 @@ const getAReview = async (id) => {
   }
 };
 
-const newReview = async () => {
+const newReview = async (review) => {
   try {
     const newReview = await db.one(
       'INSERT INTO reviews (reviewer, title, content, rating, bookmark_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
       [
-        review.id,
         review.reviewer,
         review.title,
+        review.content,
         review.rating,
         review.bookmark_id,
       ]
@@ -41,11 +44,12 @@ const updateReview = async (id, review) => {
     const updatedReview = await db.one(
       'UPDATE reviews SET reviewer=$1, title=$2, content=$3, rating=$4, bookmark_id=$5 WHERE id=$6 RETURNING *',
       [
-        review.id,
         review.reviewer,
         review.title,
+        review.content,
         review.rating,
         review.bookmark_id,
+        id,
       ]
     );
     return updatedReview;
