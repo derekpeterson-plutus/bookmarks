@@ -51,11 +51,11 @@ tbody tr:nth-child(even) {
   background: #f4eafd;
 }
 
-.New {
-  /* border: 1px solid gold;
+/* .New {
+  border: 1px solid gold;
   margin: auto;
-  width: 95%; */
-}
+  width: 95%;
+} */
 
 .New form {
   margin: auto;
@@ -82,4 +82,20 @@ input[type="submit"] {
   display: flex;
   justify-content: space-around;
   width: 50%;
+}
+
+.Reviews {
+  background-color: whitesmoke;
+  padding: 1rem;
+  box-shadow: 2px 2px 4px silver;
+}
+
+.Reviews > div {
+  padding: 1rem;
+  box-shadow: 0px 0px 2px silver;
+  background-color: ghostwhite;
+}
+
+.Reviews div:nth-child(odd) {
+  background-color: aliceblue;
 }

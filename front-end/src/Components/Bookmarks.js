@@ -1,14 +1,26 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import Bookmark from "./Bookmark";
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+import Bookmark from './Bookmark';
 
 const API = process.env.REACT_APP_API_URL;
 
 function Bookmarks() {
   const [bookmarks, setBookmarks] = useState([]);
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    axios
+      .get(`${API}/bookmarks`)
+      .then((response) => {
+        setBookmarks(response.data);
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  }, []);
+
   return (
-    <div className="Bookmarks">
+    <div className='Bookmarks'>
       <section>
         <table>
           <thead>
